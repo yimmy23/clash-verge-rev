@@ -35,7 +35,12 @@ const SettingClash = ({ onError }: Props) => {
   const { clash, version, mutateClash, patchClash } = useClash();
   const { verge, mutateVerge, patchVerge } = useVerge();
 
-  const { ipv6, "allow-lan": allowLan, "log-level": logLevel } = clash ?? {};
+  const {
+    ipv6,
+    "use-system-hosts": useSystemHosts,
+    "allow-lan": allowLan,
+    "log-level": logLevel,
+  } = clash ?? {};
 
   const { enable_random_port = false, verge_mixed_port } = verge ?? {};
 
@@ -66,6 +71,19 @@ const SettingClash = ({ onError }: Props) => {
       <ClashPortViewer ref={portRef} />
       <ControllerViewer ref={ctrlRef} />
       <ClashCoreViewer ref={coreRef} />
+
+      <SettingItem label={t("Use System Hosts")}>
+        <GuardState
+          value={useSystemHosts ?? false}
+          valueProps="checked"
+          onCatch={onError}
+          onFormat={onSwitchFormat}
+          onChange={(e) => onChangeData({ "use-system-hosts": e })}
+          onGuard={(e) => patchClash({ "use-system-hosts": e })}
+        >
+          <Switch edge="end" />
+        </GuardState>
+      </SettingItem>
 
       <SettingItem label={t("Allow Lan")}>
         <GuardState

@@ -23,6 +23,7 @@ interface IConfigData {
   port: number;
   mode: string;
   ipv6: boolean;
+  "use-system-hosts": boolean;
   "socket-port": number;
   "allow-lan": boolean;
   "log-level": string;

@@ -16,10 +16,10 @@ impl IRuntime {
         Self::default()
     }
 
-    // 这里只更改 allow-lan | ipv6 | log-level | tun
+    // 这里只更改 use-system-hosts, allow-lan | ipv6 | log-level | tun
     pub fn patch_config(&mut self, patch: Mapping) {
         if let Some(config) = self.config.as_mut() {
-            ["allow-lan", "ipv6", "log-level"]
+            ["use-system-hosts", "allow-lan", "ipv6", "log-level"]
                 .into_iter()
                 .for_each(|key| {
                     if let Some(value) = patch.get(key).to_owned() {
